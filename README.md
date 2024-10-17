@@ -39,3 +39,7 @@ The project uses Page Object Model.
         - write method to click on Back Home button
 
       - write method for log out in the  ReusableFunctions.js class as this link can be accessed from all pages of the application.
+     
+      - configure allure reporting for this project
+     
+      - try to configure Jenkins for this project
