@@ -1,6 +1,6 @@
 const { test, describe, beforeEach, afterEach, beforeAll, afterAll, expect } = require('@playwright/test');
 const { chromium } = require('playwright');
-const testData = require('../testData/testdata.json');
+const testData = require('../testData/loginCredentials.json');
 
 const { LoginPage } = require('../pageobjects/LoginPage');
 
@@ -43,7 +43,7 @@ describe('Swag labs test cases', async () => {
         });
 
         test('Login with valid credentials', async () => {
-            let { username, password, url } = testData[0];
+            let { username, password, url } = loginCredentials[0];
             await loginPage.login(username, password);
             //await page.waitForNavigation();
             await page.context().storageState({ path: 'utils/auth.json' });
@@ -52,13 +52,13 @@ describe('Swag labs test cases', async () => {
         });
 
         test('Login with locked-out user', async () => {
-            let { username, password, errorMsg } = testData[1];
+            let { username, password, errorMsg } = loginCredentials[1];
             await loginPage.login(username, password);
             await expect(page.locator('h3')).toHaveText(errorMsg);
         });
 
         test('Login with unregistered user', async () => {
-            let { username, password, errorMsg } = testData[2];
+            let { username, password, errorMsg } = loginCredentials[2];
             await loginPage.login(username, password);
             await expect(page.locator('h3')).toHaveText(errorMsg);
         });
