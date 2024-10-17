@@ -1,6 +1,6 @@
 const { test, describe, beforeEach, afterEach, beforeAll, afterAll, expect } = require('@playwright/test');
 const { chromium } = require('playwright');
-const testData = require('../testdata.json');
+const testData = require('../testData/testdata.json');
 
 const { LoginPage } = require('../pageobjects/LoginPage');
 
@@ -8,9 +8,10 @@ let browser;
 let context;
 let page;
 
+const url = 'https://www.saucedemo.com/';
 let loginPage;
 
-describe('e2e test cases', async () => {
+describe('Swag labs test cases', async () => {
     //launch chromium browser
     beforeAll(async () => {
         browser = await chromium.launch();
@@ -26,7 +27,7 @@ describe('e2e test cases', async () => {
     beforeEach(async () => {
         context = await browser.newContext();
         page = await context.newPage();
-        await page.goto('/');
+        await page.goto(url);
 
         loginPage = new LoginPage(page);
     });
@@ -36,10 +37,13 @@ describe('e2e test cases', async () => {
         await context.close();
     });
 
-    describe('Test login and authentication functionality', async () => {
+    test.describe('Test login and authentication functionality', async () => {
         test('Login with valid credentials', async () => {
             let { username, password, url } = testData[0];
             await loginPage.login(username, password);
+            //await page.waitForNavigation();
+            await page.context().storageState({ path: 'utils/auth.json' });
+
             await expect(page.url()).toEqual(url);
         });
 
@@ -54,7 +58,21 @@ describe('e2e test cases', async () => {
             await loginPage.login(username, password);
             await expect(page.locator('h3')).toHaveText(errorMsg);
         });
-    })
+    });
+
+    test.describe('Authenticated e2e test cases with skip of logging screen', async() => {
+       beforeEach(async () => {
+        page.goto('https://www.saucedemo.com/inventory.html');
+       })
+            test.use({ storageState: 'utils/auth.json' });
+        
+
+        test('bypass login screen', async() => {
+           
+            await expect(page.url()).toEqual('https://www.saucedemo.com/inventory.html');
+        })
+
+    });
 
 }
 )
