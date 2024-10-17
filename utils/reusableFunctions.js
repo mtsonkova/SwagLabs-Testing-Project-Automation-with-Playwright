@@ -17,5 +17,6 @@ class ReusableFunctions {
     async clickShoppingCart() {
         await this.shoppingCartIcon.click();
     }
-
 }
+
+module.exports = {ReusableFunctions};
