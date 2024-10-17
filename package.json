@@ -2,7 +2,11 @@
   "name": "swaglabs-testing-project-automation-with-playwright",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "headed": "npx playwright test --headed",
+    "debug": "npx playwright test --debug"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -10,5 +14,9 @@
   "devDependencies": {
     "@playwright/test": "^1.48.1",
     "@types/node": "^22.7.5"
-  }
+  },
+  "typeAcquisition": {
+        "include": ["playwright"]
+    },
+    "exclude": ["**/node_modules/*"]
 }

@@ -1,0 +1,18 @@
+[   { 
+        "username": "standard_user",
+        "password": "secret_sauce",
+        "url" : "https://www.saucedemo.com/inventory.html"
+    },
+
+    {
+        "username": "locked_out_user",
+        "password": "secret_sauce",
+        "errorMsg": "Epic sadface: Sorry, this user has been locked out."
+    },
+
+    {
+        "username": "qa_user",
+        "password": "qapass",
+        "errorMsg": "Epic sadface: Username and password do not match any user in this service"
+    }
+]
