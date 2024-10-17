@@ -27,9 +27,7 @@ describe('Swag labs test cases', async () => {
     beforeEach(async () => {
         context = await browser.newContext();
         page = await context.newPage();
-        await page.goto(url);
-
-        loginPage = new LoginPage(page);
+       
     });
 
     afterEach(async () => {
@@ -38,6 +36,12 @@ describe('Swag labs test cases', async () => {
     });
 
     test.describe('Test login and authentication functionality', async () => {
+
+        beforeEach(async () => {
+            await page.goto(url);
+            loginPage = new LoginPage(page);
+        });
+
         test('Login with valid credentials', async () => {
             let { username, password, url } = testData[0];
             await loginPage.login(username, password);
@@ -61,10 +65,12 @@ describe('Swag labs test cases', async () => {
     });
 
     test.describe('Authenticated e2e test cases with skip of logging screen', async() => {
-       beforeEach(async () => {
-        page.goto('https://www.saucedemo.com/inventory.html');
-       })
-            test.use({ storageState: 'utils/auth.json' });
+      
+       test.use({ storageState: 'utils/auth.json' });
+        beforeEach(async () => {
+            
+            await page.goto('https://www.saucedemo.com/inventory.html');
+        })       
         
 
         test('bypass login screen', async() => {
