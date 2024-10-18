@@ -1,15 +1,18 @@
 const { test, describe, beforeEach, afterEach, beforeAll, afterAll, expect } = require('@playwright/test');
 const { chromium } = require('playwright');
-const testData = require('../testData/loginCredentials.json');
+const testData = require('../testData/testData.json');
 
 const { LoginPage } = require('../pageobjects/LoginPage');
 
 let browser;
 let context;
 let page;
+let errorMsgLocator;
 
 const url = 'https://www.saucedemo.com/';
 let loginPage;
+let {loginCredentials} = testData;
+
 
 describe('Swag labs test cases', async () => {
     //launch chromium browser
@@ -45,7 +48,7 @@ describe('Swag labs test cases', async () => {
         test('Login with valid credentials', async () => {
             let { username, password, url } = loginCredentials[0];
             await loginPage.login(username, password);
-            //await page.waitForNavigation();
+         
             await page.context().storageState({ path: 'utils/auth.json' });
 
             await expect(page.url()).toEqual(url);
@@ -54,13 +57,15 @@ describe('Swag labs test cases', async () => {
         test('Login with locked-out user', async () => {
             let { username, password, errorMsg } = loginCredentials[1];
             await loginPage.login(username, password);
-            await expect(page.locator('h3')).toHaveText(errorMsg);
+            errorMsgLocator = loginPage.getErrMsgLocator();
+            await expect(errorMsgLocator).toHaveText(errorMsg);
         });
 
         test('Login with unregistered user', async () => {
             let { username, password, errorMsg } = loginCredentials[2];
             await loginPage.login(username, password);
-            await expect(page.locator('h3')).toHaveText(errorMsg);
+            errorMsgLocator = loginPage.getErrMsgLocator();
+            await expect(errorMsgLocator).toHaveText(errorMsg);
         });
     });
 
