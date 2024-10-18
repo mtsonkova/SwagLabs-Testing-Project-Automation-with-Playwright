@@ -19,8 +19,10 @@ The project uses Page Object Model.
 ### ToDo
  - implement products page
      - write methods for filter logic
-     - write method to grab all products and add them to cart
-     - write method to grab all products and add to cart product on certain index;
+     - write method to grab all products with their prices;
+     - write method to add to cart only products which price is greater then or equal to given amount;
+     - write method to add to cart only products which price is less then or equal to given amount;
+     - write method to grab all products and add to cart product on certain index; -> rethink as there are only 6 products on the page and there will be no more changes
          - write logic to check if index is valid or out of range;
       
    - implement shopping cart page
