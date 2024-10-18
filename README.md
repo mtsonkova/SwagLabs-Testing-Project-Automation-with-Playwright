@@ -28,18 +28,20 @@ The project uses Page Object Model.
     
    - implement checkout your information page
      - write method to fill required fields with valid data;
-     - write separate json file with user data
+     - write separate json file with user data -> **N/A** solved by modifying the existing json file.
      - write methods for clicking the buttons;
 
-     - implement checkout overview page
-       - write methods for clicking the buttons;
+   - implement checkout overview page
+      - write methods for clicking the buttons;
       
-    - implement Order Confirmation page
-        - write methodc to grab thank you text
-        - write method to click on Back Home button
+   - implement Order Confirmation page
+      - write methodc to grab thank you text
+      - write method to click on Back Home button
 
-      - write method for log out in the  ReusableFunctions.js class as this link can be accessed from all pages of the application.
+   - write method for log out in the  ReusableFunctions.js class as this link can be accessed from all pages of the application.
      
-      - configure allure reporting for this project
+   - configure allure reporting for this project
      
-      - try to configure Jenkins for this project
+   - try to configure Jenkins for this project
+  
+   - solve GitHub Actions workflow failure on push. Flow created by default when creating the Playwright project. Need further reading since I do not have knowledge on Github actions workflows and cannot determine the root cause.
