@@ -18,5 +18,6 @@ class CartPage{
         return await this.cartProducts.nth(0);
     }
 
-
 }
+
+module.exports = {CartPage};
