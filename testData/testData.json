@@ -19,7 +19,7 @@
         "userData": {
             "firstName": "Samantha",
             "lastName": "Green",
-            "pastalCode": "1011"
+            "postalCode": "1011"
         },
 
         "checkoutCompleteTitle" : "Thank you for your order!",

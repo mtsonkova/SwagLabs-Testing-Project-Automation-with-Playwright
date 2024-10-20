@@ -1,6 +1,7 @@
 class ProductsPage{
     constructor(page) {
         this.page = page;
+        this.dropdown = page.locator('data-test=product-sort-container');
         this.filterByNameAZ = page.getByText('Name (A to Z)');
         this.filterByNameZA = page.getByText('Name (Z to A)');
         this.filterByPriceLowHigh = page.getByText('Price (low to high)');
@@ -9,6 +10,10 @@ class ProductsPage{
         this.productsInfo = page.locator('.inventory_item_description');
     }
 
+    async clickOnFilterDropdown() {
+        await this.dropdown.click();
+    }
+    
     async selectFilterByNameAtoZ() {
         await this.filterByNameAZ.click();
     }

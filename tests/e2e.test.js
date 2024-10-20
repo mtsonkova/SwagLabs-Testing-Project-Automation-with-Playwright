@@ -3,15 +3,30 @@ const { chromium } = require('playwright');
 const testData = require('../testData/testData.json');
 
 const { LoginPage } = require('../pageobjects/LoginPage');
+const { ProductsPage } = require('../pageobjects/ProductsPage');
+const { CartPage } = require('../pageobjects/CartPage');
+const { CheckoutInformation } = require('../pageobjects/CheckoutInformation');
+const { CheckoutOverview } = require('../pageobjects/CheckoutOverview');
+const { CheckoutComplete } = require('../pageobjects/CheckoutComplete');
+const { ReusableFunctions } = require('../utils/ReusableFunctions');
 
 let browser;
 let context;
 let page;
-let errorMsgLocator;
+
 
 const url = 'https://www.saucedemo.com/';
 let loginPage;
-let {loginCredentials} = testData;
+let errorMsgLocator;
+
+let productsPage;
+let cartPage;
+let checkoutInformation;
+let checkoutOverview;
+let checkoutComplete;
+let reusableFunctions;
+
+let { loginCredentials } = testData;
 
 
 describe('Swag labs test cases', async () => {
@@ -30,7 +45,7 @@ describe('Swag labs test cases', async () => {
     beforeEach(async () => {
         context = await browser.newContext();
         page = await context.newPage();
-       
+
     });
 
     afterEach(async () => {
@@ -45,10 +60,10 @@ describe('Swag labs test cases', async () => {
             loginPage = new LoginPage(page);
         });
 
-        test('Login with valid credentials', async () => {
+        test.only('Login with valid credentials', async () => {
             let { username, password, url } = loginCredentials[0];
             await loginPage.login(username, password);
-         
+
             await page.context().storageState({ path: 'utils/auth.json' });
 
             await expect(page.url()).toEqual(url);
@@ -69,18 +84,37 @@ describe('Swag labs test cases', async () => {
         });
     });
 
-    test.describe('Authenticated e2e test cases with skip of logging screen', async() => {
-      
-       test.use({ storageState: 'utils/auth.json' });
-        beforeEach(async () => {
-            
-            await page.goto('https://www.saucedemo.com/inventory.html');
-        })       
-        
+    test.describe('Authenticated e2e test cases with skip of logging screen', async () => {
 
-        test('bypass login screen', async() => {
-           
-            await expect(page.url()).toEqual('https://www.saucedemo.com/inventory.html');
+        test.use({ storageState: 'utils/auth.json' });
+
+        beforeEach(async () => {
+
+            await page.goto('https://www.saucedemo.com/inventory.html');
+            productsPage = new ProductsPage(page);
+            cartPage = new CartPage(page);
+            checkoutInformation = new CheckoutInformation(page);
+            checkoutOverview = new CheckoutOverview(page);
+            checkoutComplete = new CheckoutComplete(page);
+            reusableFunctions = new ReusableFunctions(page);
+        })
+
+
+        test.only('Purchase the cheapest product from Products page', async () => {
+            await page.goto('https://www.saucedemo.com/inventory.html');
+            const { firstName, lastName, postalCode } = testData.userData;
+            
+            await productsPage.clickOnFilterDropdown();
+            await productsPage.selectFilterByPriceLowHigh();
+            
+            let cheapestProduct = await productsPage.getFirstProductOnProductsPage();
+            await reusableFunctions.clickAddToCart(cheapestProduct);
+            await reusableFunctions.clickShoppingCart();
+            await cartPage.clickOnCheckout();
+            await checkoutInformation.fillUserData(firstName, lastName, postalCode);
+            await checkoutOverview.clickOnFinish();
+            await expect(checkoutComplete.getHeadingLocator().textContent).toHaveText(testData.checkoutCompleteTitle);
+            await expect(checkoutComplete.getParagraphLocator().textContent).toHaveText(testData.checkoutCompleteParagraph);
         })
 
     });
