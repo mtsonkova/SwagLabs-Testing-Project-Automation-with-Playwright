@@ -20,5 +20,8 @@
             "firstName": "Samantha",
             "lastName": "Green",
             "pastalCode": "1011"
-        }
+        },
+
+        "checkoutCompleteTitle" : "Thank you for your order!",
+        "checkoutCompleteParagraph" : "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
     }
