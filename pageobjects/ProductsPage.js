@@ -11,12 +11,12 @@ class ProductsPage {
 
     async selectFilterByNameAtoZ() {
         await this.clickOnFilterDropdown();
-        await this.dropdown.selectOption({ value: 'az' });
+        await this.dropdown.selectOption('Name (A to Z)');
     }
 
     async selectFilterByNameZtoA() {
         await this.clickOnFilterDropdown();
-        await this.dropdown.selectOption({ label: 'Name (Z to A)' });
+        await this.dropdown.selectOption('Name (Z to A)');
     }
 
     async selectFilterByPriceLowHigh() {
@@ -26,7 +26,7 @@ class ProductsPage {
 
     async selectFilterByPriceHighLow() {
         await this.clickOnFilterDropdown();
-        await this.dropdown.selectOption({ label: 'Price (high to low)' });
+        await this.dropdown.selectOption('Price (high to low)');
     }
 
     async getFirstProductOnProductsPage() {

@@ -99,11 +99,11 @@ describe('Swag labs test cases', async () => {
             reusableFunctions = new ReusableFunctions(page);
         })
 
+        const { firstName, lastName, postalCode } = testData.userData;
 
-        test.only('Purchase the cheapest product from Products page', async () => {
+        test('Purchase the cheapest product from Products page', async () => {
             await page.goto('https://www.saucedemo.com/inventory.html');
-            const { firstName, lastName, postalCode } = testData.userData;
-            
+                      
             await productsPage.clickOnFilterDropdown();
             await productsPage.selectFilterByPriceLowHigh();
             
@@ -119,7 +119,34 @@ describe('Swag labs test cases', async () => {
             await expect(paragraphLocator).toHaveText(testData.checkoutCompleteParagraph);
             await reusableFunctions.clickLogOut();
             await expect(page.url()).toEqual(url);
-        })
+        });
+
+        test('Add one product to cart then return from Checkout Overview page to add one more', async() => {
+            await page.goto('https://www.saucedemo.com/inventory.html');
+                        
+            await productsPage.clickOnFilterDropdown();
+            await productsPage.selectFilterByPriceHighLow();
+            
+            let mostExpensiveProduct = await productsPage.getFirstProductOnProductsPage();
+            await reusableFunctions.clickAddToCart(mostExpensiveProduct);
+            await reusableFunctions.clickShoppingCart();
+            await cartPage.clickOnCheckout();
+            await checkoutInformation.fillUserData(firstName, lastName, postalCode);
+            await checkoutOverview.clickOnCancel();
+            await productsPage.clickOnFilterDropdown();
+            await productsPage.selectFilterByPriceLowHigh();
+            
+            let cheapestProduct = await productsPage.getFirstProductOnProductsPage();
+            await reusableFunctions.clickAddToCart(cheapestProduct);
+            await reusableFunctions.clickShoppingCart();
+            await cartPage.clickOnCheckout();
+            await checkoutInformation.fillUserData(firstName, lastName, postalCode);
+            await checkoutOverview.clickOnFinish();
+            let titleLocator = checkoutComplete.getHeadingLocator();
+            let paragraphLocator = checkoutComplete.getParagraphLocator();
+            await expect(titleLocator).toHaveText(testData.checkoutCompleteTitle);
+            await expect(paragraphLocator).toHaveText(testData.checkoutCompleteParagraph);
+        });
 
     });
 
