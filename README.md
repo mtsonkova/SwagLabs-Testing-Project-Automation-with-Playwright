@@ -21,9 +21,9 @@ The project uses Page Object Model.
 Test case **"Add one product to cart then return from Checkout Overview page to add one more"** fails when executed together with all test cases but passes when executed alone.
 This requires further investigation.
 
-    <img width="956" alt="image" src="https://github.com/user-attachments/assets/43873336-1e55-4b40-a3e1-5d29ac28143b">
+<img width="956" alt="image" src="https://github.com/user-attachments/assets/43873336-1e55-4b40-a3e1-5d29ac28143b">
 
 
-    <img width="956" alt="image" src="https://github.com/user-attachments/assets/9e04ce40-2ce9-4bc6-853f-c53f1f45c93d">
+<img width="956" alt="image" src="https://github.com/user-attachments/assets/9e04ce40-2ce9-4bc6-853f-c53f1f45c93d">
 
 
