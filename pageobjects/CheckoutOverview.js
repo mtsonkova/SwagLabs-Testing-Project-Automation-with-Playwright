@@ -2,12 +2,12 @@ class CheckoutOverview{
     constructor(page) {
         this.page = page;
         this.checkoutProducts = page.locator('.cart_item');
-        this.itemTotalLabel = page.getByTestId('subtotal-label');
-        this.taxLabel = page.getByTestId('tax-label');
-        this.totalLabel = page.getByTestId('total-label');
+        this.itemTotalLabel = page.locator('.summary_subtotal_label');
+        this.taxLabel = page.locator('.summary_tax_label');
+        this.totalLabel = page.locator('summary_total_label');
 
-        this.cancel = page.getByTestId('cancel');
-        this.finish = page.getByTestId('finish');
+        this.cancel = page.locator('#cancel');
+        this.finish = page.locator('#finish');
     }
 
     async getAllProductsCount() {

@@ -1,17 +1,17 @@
 class CheckoutComplete{
     constructor(page) {
         this.page = page;
-        this.header = page.getByTestId('complete-header');
-        this.paragraph = page.getByTestId('complete-text');
-        this.backHome = page.getByTestId('back-to-products');
+        this.headerLocator = page.locator('.complete-header');
+        this.paragraphLocator = page.locator('.complete-text');
+        this.backHome = page.locator('#back-to-products');
     }
 
     getHeadingLocator() {
-        return this.header;
+        return this.headerLocator;
     }
 
     getParagraphLocator() {
-        return this.paragraph;
+        return this.paragraphLocator;
     }
 
     async clickOnBackHome() {

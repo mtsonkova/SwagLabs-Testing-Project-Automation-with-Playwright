@@ -89,7 +89,7 @@ describe('Swag labs test cases', async () => {
        test.use({ storageState: 'utils/auth.json' });
 
         beforeEach(async () => {
-
+           
             await page.goto('https://www.saucedemo.com/inventory.html');
             productsPage = new ProductsPage(page);
             cartPage = new CartPage(page);
@@ -113,8 +113,10 @@ describe('Swag labs test cases', async () => {
             await cartPage.clickOnCheckout();
             await checkoutInformation.fillUserData(firstName, lastName, postalCode);
             await checkoutOverview.clickOnFinish();
-            await expect(checkoutComplete.getHeadingLocator().textContent).toHaveText(testData.checkoutCompleteTitle);
-            await expect(checkoutComplete.getParagraphLocator().textContent).toHaveText(testData.checkoutCompleteParagraph);
+            let titleLocator = checkoutComplete.getHeadingLocator();
+            let paragraphLocator = checkoutComplete.getParagraphLocator();
+            await expect(titleLocator).toHaveText(testData.checkoutCompleteTitle);
+            await expect(paragraphLocator).toHaveText(testData.checkoutCompleteParagraph);
         })
 
     });
