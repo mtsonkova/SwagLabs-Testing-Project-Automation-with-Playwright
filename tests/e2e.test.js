@@ -60,7 +60,7 @@ describe('Swag labs test cases', async () => {
             loginPage = new LoginPage(page);
         });
 
-        test.only('Login with valid credentials', async () => {
+        test('Login with valid credentials', async () => {
             let { username, password, url } = loginCredentials[0];
             await loginPage.login(username, password);
 
@@ -86,7 +86,7 @@ describe('Swag labs test cases', async () => {
 
     test.describe('Authenticated e2e test cases with skip of logging screen', async () => {
 
-        test.use({ storageState: 'utils/auth.json' });
+       test.use({ storageState: 'utils/auth.json' });
 
         beforeEach(async () => {
 

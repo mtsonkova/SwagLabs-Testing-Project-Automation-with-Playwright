@@ -1,11 +1,11 @@
 class ProductsPage{
     constructor(page) {
         this.page = page;
-        this.dropdown = page.locator('data-test=product-sort-container');
-        this.filterByNameAZ = page.getByText('Name (A to Z)');
-        this.filterByNameZA = page.getByText('Name (Z to A)');
-        this.filterByPriceLowHigh = page.getByText('Price (low to high)');
-        this.filterByPriceHighLow = page.getByText('Price (high to low)');
+        this.dropdown = page.locator('.select_container');
+        this.filterByNameAZ = dropdown.selectOption('Name (A to Z)');
+        this.filterByNameZA = dropdown.selectOption('Name (Z to A)');
+        this.filterByPriceLowHigh = dropdown.selectOption('Price (low to high)');
+        this.filterByPriceHighLow = dropdown.selectOption('Price (high to low)');
 
         this.productsInfo = page.locator('.inventory_item_description');
     }
