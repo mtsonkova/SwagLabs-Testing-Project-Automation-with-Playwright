@@ -117,6 +117,8 @@ describe('Swag labs test cases', async () => {
             let paragraphLocator = checkoutComplete.getParagraphLocator();
             await expect(titleLocator).toHaveText(testData.checkoutCompleteTitle);
             await expect(paragraphLocator).toHaveText(testData.checkoutCompleteParagraph);
+            await reusableFunctions.clickLogOut();
+            await expect(page.url()).toEqual(url);
         })
 
     });

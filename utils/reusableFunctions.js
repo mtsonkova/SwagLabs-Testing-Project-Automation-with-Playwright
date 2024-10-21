@@ -2,7 +2,7 @@ class ReusableFunctions {
     constructor(page) {
         this.page = page;
         this.shoppingCartIcon = page.locator('.shopping_cart_link');       
-        this.menu = page.locator('.react-burger-menu-btn');
+        this.menu = page.locator('#react-burger-menu-btn');
         this.logout = page.getByRole('link', {name: 'Logout'});
     }
 
