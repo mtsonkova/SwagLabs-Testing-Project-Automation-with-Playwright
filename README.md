@@ -5,6 +5,7 @@
 - **Automation Tool:** Playwright;
 - **Programming Language:** JavaScript;
 - **Reporting Tool:** Allure Report;
+- The project uses the default GitHub Actions, build in plawright
 
 ## Solution
 Test cases are logically combined in two separate describe blocks.
