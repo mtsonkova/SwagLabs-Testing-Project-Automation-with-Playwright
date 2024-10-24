@@ -23,7 +23,9 @@ The project uses Page Object Model.
 
 
 
-<img width="947" alt="image" src="https://github.com/user-attachments/assets/09096206-3b7b-4c99-9322-b5966cac7490">
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/dba6bfc2-b928-47ee-bf53-c1cded7fb7a7">
+
 
 
 
