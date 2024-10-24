@@ -121,7 +121,7 @@ describe('Swag labs test cases', async () => {
             await expect(page.url()).toEqual(url);
         });
 
-        test('Add one product to cart then return from Checkout Overview page to add one more', async() => {
+        test('Add one product to cart then return from shopping cart page to add one more', async() => {
             await page.goto('https://www.saucedemo.com/inventory.html');
                         
             await productsPage.clickOnFilterDropdown();
@@ -130,12 +130,11 @@ describe('Swag labs test cases', async () => {
             let mostExpensiveProduct = await productsPage.getFirstProductOnProductsPage();
             await reusableFunctions.clickAddToCart(mostExpensiveProduct);
             await reusableFunctions.clickShoppingCart();
-            await cartPage.clickOnCheckout();
-            await checkoutInformation.fillUserData(firstName, lastName, postalCode);
-            await checkoutOverview.clickOnCancel();
+            await cartPage.clickOnContinueShopping();
+            await page.goto('https://www.saucedemo.com/inventory.html');
+
             await productsPage.clickOnFilterDropdown();
             await productsPage.selectFilterByPriceLowHigh();
-            
             let cheapestProduct = await productsPage.getFirstProductOnProductsPage();
             await reusableFunctions.clickAddToCart(cheapestProduct);
             await reusableFunctions.clickShoppingCart();
