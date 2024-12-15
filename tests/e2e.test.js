@@ -8,12 +8,12 @@ const { CartPage } = require('../pageobjects/CartPage');
 const { CheckoutInformation } = require('../pageobjects/CheckoutInformation');
 const { CheckoutOverview } = require('../pageobjects/CheckoutOverview');
 const { CheckoutComplete } = require('../pageobjects/CheckoutComplete');
-const { ReusableFunctions } = require('../utils/ReusableFunctions');
+const { ReusableFunctions} = require('../utils/reusableFunctions');
+
 
 let browser;
 let context;
 let page;
-
 
 const url = 'https://www.saucedemo.com/';
 let loginPage;
@@ -25,6 +25,7 @@ let checkoutInformation;
 let checkoutOverview;
 let checkoutComplete;
 let reusableFunctions;
+
 
 let { loginCredentials } = testData;
 
