@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'mcr.microsoft.com/playwright:v1.38.0-focal' // Official Playwright image
+            image 'mcr.microsoft.com/playwright:v1.49.1-noble' // Official Playwright image
             args '--ipc=host'  // Required for running browsers
         }
     }
