@@ -7,12 +7,15 @@ pipeline {
     }
     environment {
         CI = 'true' // Necessary for CI tools to run Playwright
+        NPM_CONFIG_CACHE = '.npm' // Use a local writable directory for npm cache
     }
     stages {
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Install npm dependencies
+                 script {
+                    // Ensure npm cache directory is writable
+                    sh 'mkdir -p .npm && chmod -R 777 .npm'
+                    // Install dependencies
                     sh 'npm ci'
                 }
             }
