@@ -1,22 +1,11 @@
 pipeline {
-    agent any
-
-    stages {
-        // this is a single line comment in Jenkins
-
-        /*
-        This is a multiline comment in Jenkins
-        */
-               stage('E2E Test') {
-            agent {
-                    docker {
-                        image 'mcr.microsoft.com/playwright:v1.49.1-noble'     
-                        args '--ipc=host'  // Required for running browsers
-                        reuseNode: true                   
-                    }
-                }
-            
-             environment {
+    agent {
+        docker {
+            image 'mcr.microsoft.com/playwright:v1.38.0-focal' // Official Playwright image
+            args '--ipc=host'  // Required for running browsers
+        }
+    }
+    environment {
         CI = 'true' // Necessary for CI tools to run Playwright
     }
     stages {
@@ -50,6 +39,5 @@ pipeline {
             archiveArtifacts artifacts: '**/test-results/**/*.*', allowEmptyArchive: true
             junit '**/test-results/*.xml'
         }
-    }        
-}
     }
+}
