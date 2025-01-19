@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Run Playwright E2E tests
-                    sh 'npx playwright test --reporter=dot'
+                    sh 'npx playwright test --reporter=html'
                 }
             }
         }
