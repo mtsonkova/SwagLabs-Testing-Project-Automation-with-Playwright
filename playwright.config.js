@@ -28,6 +28,9 @@ module.exports = defineConfig({
     //baseURL: 'https://www.saucedemo.com/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    screenshot: 'only-on-failure', // Take screenshots only on test failure
+    video: 'retain-on-failure',
+    
     trace: 'on-first-retry',
   },
 
