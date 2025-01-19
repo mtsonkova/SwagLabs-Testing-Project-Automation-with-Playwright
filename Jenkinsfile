@@ -7,45 +7,48 @@ pipeline {
         /*
         This is a multiline comment in Jenkins
         */
-        stage('Build') {
-            agent {
-                    docker {
-                        image 'node:22-alpine'     
-                        reuseNode: true                   
-                    }
-                }
-
-            steps {
-                sh '''
-                node --version
-                npm --version
-                npm ci
-                npm run build
-                ls la
-                '''
-            }   
-        }
-
-        stage('E2E Test') {
+               stage('E2E Test') {
             agent {
                     docker {
                         image 'mcr.microsoft.com/playwright:v1.49.1-noble'     
+                        args '--ipc=host'  // Required for running browsers
                         reuseNode: true                   
                     }
                 }
             
+             environment {
+        CI = 'true' // Necessary for CI tools to run Playwright
+    }
+    stages {
+        stage('Install Dependencies') {
             steps {
-                sh '''
-                npx playwright test
-                '''
+                script {
+                    // Install npm dependencies
+                    sh 'npm ci'
+                }
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Run Playwright E2E tests
+                    sh 'npx playwright test --reporter=dot'
+                }
+            }
+        }
+        stage('Generate Report') {
+            steps {
+                script {
+                    // Optional: Generate HTML test report
+                    sh 'npx playwright show-report'
+                }
             }
         }
     }
-
-
-    post{
+    post {
         always {
-            junit 'test-results/junit.xml'
+            archiveArtifacts artifacts: '**/test-results/**/*.*', allowEmptyArchive: true
+            junit '**/test-results/*.xml'
         }
-    }
+    }        
 }
