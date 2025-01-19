@@ -28,14 +28,7 @@ pipeline {
                 }
             }
         }
-        stage('Generate Report') {
-            steps {
-                script {
-                    // Optional: Generate HTML test report
-                    sh 'npx playwright show-report'
-                }
-            }
-        }
+     
     }
     post {
         always {
