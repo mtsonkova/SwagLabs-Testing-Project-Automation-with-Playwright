@@ -14,6 +14,7 @@ export default defineConfig({
     ['allure-playwright']
   ],
   use: {
+    baseUrl: 'https://www.saucedemo.com/',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',

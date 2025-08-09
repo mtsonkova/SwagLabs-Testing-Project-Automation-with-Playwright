@@ -12,6 +12,7 @@ export class LoginPage{
         await this.loginPageLocators.userName.fill(username);
         await this.loginPageLocators.password.fill(pass);
         await this.loginPageLocators.loginBtn.click();
+        return await this.page.url();
     
     }
 
