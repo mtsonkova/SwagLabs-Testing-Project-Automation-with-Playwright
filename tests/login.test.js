@@ -14,7 +14,7 @@ test.describe('Login functionality', () => {
   await page.goto(baseUrl); 
 })
     test('Login with valid credentials', async () => {
-            let { username, password, url } = loginCredentials[0];
+            let { username, password } = loginCredentials[0];
             let currentUrl = await loginPage.login(username, password);
             expect(currentUrl).toEqual(baseUrl+'inventory.html');
         });

@@ -6,6 +6,7 @@
       "@utils/*": ["utils/*"],
       "@tests/*": ["tests/*"],
       "@testData/*": ["testData/*"],
+      "@fixtures/*": ["fixtures/*"],
       "@playwright/@": ["playwright/*"]
     }
   }

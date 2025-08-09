@@ -45,7 +45,7 @@ async selectFilter(filterValue) {
     }
 }
 
-    async getProductOnProductsPagePerIndex(index) {
+    async getProductPerIndex(index) {
         if(index < 0 || index > his.productsPageLocators.productsInfo.length - 1) {
             throw('Index cannot be smaller than 0 and greater than 5')
         }
