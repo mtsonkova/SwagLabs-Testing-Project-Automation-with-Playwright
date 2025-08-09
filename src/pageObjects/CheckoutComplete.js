@@ -1,22 +1,20 @@
-class CheckoutComplete{
+import { CheckoutCompleteLocators } from "@src/pageLocators/checkoutCompleteLocators";
+
+export class CheckoutComplete{
     constructor(page) {
         this.page = page;
-        this.headerLocator = page.locator('.complete-header');
-        this.paragraphLocator = page.locator('.complete-text');
-        this.backHome = page.locator('#back-to-products');
+        this.checkoutCompleteLocators = CheckoutCompleteLocators(page);
     }
 
     getHeadingLocator() {
-        return this.headerLocator;
+        return this.checkoutCompleteLocators.headerLocator;
     }
 
     getParagraphLocator() {
-        return this.paragraphLocator;
+        return this.checkoutCompleteLocators.paragraphLocator;
     }
 
     async clickOnBackHome() {
-        await this.backHome.click();
+        await this.checkoutCompleteLocators.backHome.click();
     }
 }
-
-module.exports = {CheckoutComplete};

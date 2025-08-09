@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { chromium } from 'playwright';
-import testData from '@testData';
+import {testData} from '@testData';
 
 import { LoginPage } from '@src/pageObjects/LoginPage';
 import { ProductsPage } from '@src/pageObjects/ProductsPage';

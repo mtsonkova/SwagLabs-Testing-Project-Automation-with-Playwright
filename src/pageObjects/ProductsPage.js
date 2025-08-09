@@ -1,40 +1,41 @@
-class ProductsPage {
+import { ProductsPageLocators } from "@src/pageLocators/productsPageLocators";
+
+export class ProductsPage {
     constructor(page) {
         this.page = page;
-        this.dropdown = page.locator('.product_sort_container');
-        this.productsInfo = page.locator('.inventory_item_description');
+       this.productsPageLocators = ProductsPageLocators(page);
     }
 
     async clickOnFilterDropdown() {
-        await this.dropdown.click();
+        await this.productsPageLocators.dropdown.click();
     }
 
     async selectFilterByNameAtoZ() {
         await this.clickOnFilterDropdown();
-        await this.dropdown.selectOption('Name (A to Z)');
+        await this.productsPageLocators.dropdown.selectOption('Name (A to Z)');
     }
 
     async selectFilterByNameZtoA() {
         await this.clickOnFilterDropdown();
-        await this.dropdown.selectOption('Name (Z to A)');
+        await this.productsPageLocators.dropdown.selectOption('Name (Z to A)');
     }
 
     async selectFilterByPriceLowHigh() {
         await this.clickOnFilterDropdown();
-        await this.dropdown.selectOption('Price (low to high)');
+        await this.productsPageLocators.dropdown.selectOption('Price (low to high)');
     }
 
     async selectFilterByPriceHighLow() {
         await this.clickOnFilterDropdown();
-        await this.dropdown.selectOption('Price (high to low)');
+        await this.productsPageLocators.dropdown.selectOption('Price (high to low)');
     }
 
     async getFirstProductOnProductsPage() {
-        return await this.productsInfo.nth(0);
+        return await this.productsPageLocators.productsInfo.nth(0);
     }
 
     async getProductsWithPricesBelowOrEqualNum(price) {
-        let size = this.productsInfo.size();
+        let size = this.productsPageLocators.productsInfo.size();
         let productsArr = [];
 
         for (let i = 0; i <= size; i++) {
@@ -52,7 +53,7 @@ class ProductsPage {
     }
 
     async getProductsWithPricesAboveOrEqualNum(price) {
-        let size = this.productsInfo.size();
+        let size = this.productsPageLocators.productsInfo.size();
         let productsArr = [];
 
         for (let i = 0; i < size; i++) {
@@ -68,5 +69,3 @@ class ProductsPage {
         return productsArr;
     }
 }
-
-module.exports = { ProductsPage };

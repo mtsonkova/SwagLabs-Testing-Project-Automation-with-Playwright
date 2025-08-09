@@ -1,27 +1,22 @@
-class CheckoutInformation{
+import { CheckoutInformationLocators } from "@src/pageLocators/checkoutInformationLocators";
+export class CheckoutInformation{
     constructor(page) {
         this.page = page;
-        this.firstName = page.locator('#first-name');
-        this.lastName = page.locator('#last-name');
-        this.postalCode = page.locator('#postal-code');
-        this.btnCancel = page.getByRole('button', {name:'Cancel'});
-        this.btnContinue = page.getByRole('button', {name:'Continue'});
+        this.checkoutInformationLocators = CheckoutInformationLocators(page);
     }
 
     async clickOnCancel() {
-        await this.btnCancel.click();
+        await this.checkoutInformationLocators.btnCancel.click();
     }
 
     async clickOnContinue() {
-        await this.btnContinue.click();
+        await this.checkoutInformationLocators.btnContinue.click();
     }
 
     async fillUserData(firstName, lastName, postCode) {
-        await this.firstName.fill(firstName);
-        await this.lastName.fill(lastName);
-        await this.postalCode.fill(postCode);
+        await this.checkoutInformationLocators.firstName.fill(firstName);
+        await this.checkoutInformationLocators.lastName.fill(lastName);
+        await this.checkoutInformationLocators.postalCode.fill(postCode);
         this.clickOnContinue();
     }
 }
-
-module.exports = {CheckoutInformation};

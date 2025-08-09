@@ -1,28 +1,22 @@
-class LoginPage{
+import { LoginPageLocators } from '@src/pageLocators/loginPageLocators';
 
-     /**
-   * @param {import('@playwright/test').Page} page
-   */
-    constructor(page) {
+export class LoginPage{
+
+     constructor(page) {
         this.page = page;
-        this.userName = page.locator('#user-name');
-        this.password = page.locator('#password');
-        this.loginBtn = page.locator('#login-button');
-        this.errorMsgLocator = page.locator('h3');
+        this.loginPageLocators = LoginPageLocators(page);
        
     }
 
     async login(username, pass) {
-        await this.userName.fill(username);
-        await this.password.fill(pass);
-        await this.loginBtn.click();
+        await this.loginPageLocators.userName.fill(username);
+        await this.loginPageLocators.password.fill(pass);
+        await this.loginPageLocators.loginBtn.click();
     
     }
 
     getErrMsgLocator() {
-        return this.errorMsgLocator;
+        return this.loginPageLocators.errorMsgLocator;
     }
     
 }
-
-module.exports = {LoginPage};
