@@ -1,5 +1,5 @@
 // @ts-check
-import 'module-alias/register';
+import 'module-alias/register.js';
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
