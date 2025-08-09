@@ -1,14 +1,14 @@
-const { test, describe, beforeEach, afterEach, beforeAll, afterAll, expect } = require('@playwright/test');
-const { chromium } = require('playwright');
-const testData = require('../testData/testData.json');
+import { test, expect } from '@playwright/test';
+import { chromium } from 'playwright';
+import testData from '@testData';
 
-const { LoginPage } = require('../pageobjects/LoginPage');
-const { ProductsPage } = require('../pageobjects/ProductsPage');
-const { CartPage } = require('../pageobjects/CartPage');
-const { CheckoutInformation } = require('../pageobjects/CheckoutInformation');
-const { CheckoutOverview } = require('../pageobjects/CheckoutOverview');
-const { CheckoutComplete } = require('../pageobjects/CheckoutComplete');
-const { ReusableFunctions} = require('../utils/reusableFunctions');
+import { LoginPage } from '@src/pageObjects/LoginPage';
+import { ProductsPage } from '@src/pageObjects/ProductsPage';
+import { CartPage }  from '@src/pageObjects/CartPage';
+import { CheckoutInformation } from '@src/pageObjects/CheckoutInformation';
+import { CheckoutOverview } from '@src/pageObjects/CheckoutOverview';
+import { CheckoutComplete } from '@src/pageObjects/CheckoutComplete';
+import { ReusableFunctions} from '@utils/reusableFunctions';
 
 
 let browser;
