@@ -1,23 +1,21 @@
-class CartPage{
+import { CartLocators } from "../pageLocators/cartLocators";
+
+export class CartPage {
     constructor(page) {
         this.page = page;
-        this.cartProducts = page.locator('.cart_item');
-        this.continueShopping = page.getByRole('button', {name:'Continue Shopping'});
-        this.checkout = page.getByRole('button', {name:'Checkout'});
+        this.cartLocators = CartLocators(page)
     }
 
     async clickOnContinueShopping() {
-        await this.continueShopping.click();
+        await this.cartLocators.continueShopping.click();
     } 
 
     async clickOnCheckout() {
-        await this.checkout.click();
+        await this.cartLocators.checkout.click();
     }
 
     async getFirstProductFromCart() {
-        return await this.cartProducts.nth(0);
+        return await this.cartLocators.cartProducts.nth(0);
     }
 
 }
-
-module.exports = {CartPage};
