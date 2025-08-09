@@ -1,4 +1,4 @@
-import { CartLocators } from "../pageLocators/cartLocators";
+import { CartLocators } from "@src/pageLocators/cartLocators";
 
 export class CartPage {
     constructor(page) {
