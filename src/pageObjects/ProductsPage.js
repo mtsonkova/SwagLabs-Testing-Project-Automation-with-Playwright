@@ -10,62 +10,42 @@ export class ProductsPage {
         await this.productsPageLocators.dropdown.click();
     }
 
-    async selectFilterByNameAtoZ() {
+    /**
+ * Selects a filter option from the dropdown
+ * @param {string} filterValue - The filter option to select
+ * @throws {Error} When an invalid filter option is provided
+ */
+async selectFilter(filterValue) {
+    // Input validation
+    if (!filterValue || typeof filterValue !== 'string') {
+        throw new Error('Filter value must be a non-empty string');
+    }
+
+    // Configuration object for better maintainability
+    const FILTER_OPTIONS = {
+        'A to Z': 'Name (A to Z)',
+        'Z to A': 'Name (Z to A)', 
+        'low to high': 'Price (low to high)',
+        'high to low': 'Price (high to low)'
+    };
+
+    const normalizedFilterValue = filterValue.trim();
+    const dropdownOption = FILTER_OPTIONS[normalizedFilterValue];
+
+    if (!dropdownOption) {
+        const availableOptions = Object.keys(FILTER_OPTIONS).join(', ');
+        throw new Error(`Invalid filter option: "${filterValue}". Available options: ${availableOptions}`);
+    }
+
+    try {
         await this.clickOnFilterDropdown();
-        await this.productsPageLocators.dropdown.selectOption('Name (A to Z)');
+        await this.productsPageLocators.dropdown.selectOption(dropdownOption);
+    } catch (error) {
+        throw new Error(`Failed to select filter "${filterValue}": ${error.message}`);
     }
+}
 
-    async selectFilterByNameZtoA() {
-        await this.clickOnFilterDropdown();
-        await this.productsPageLocators.dropdown.selectOption('Name (Z to A)');
-    }
-
-    async selectFilterByPriceLowHigh() {
-        await this.clickOnFilterDropdown();
-        await this.productsPageLocators.dropdown.selectOption('Price (low to high)');
-    }
-
-    async selectFilterByPriceHighLow() {
-        await this.clickOnFilterDropdown();
-        await this.productsPageLocators.dropdown.selectOption('Price (high to low)');
-    }
-
-    async getFirstProductOnProductsPage() {
-        return await this.productsPageLocators.productsInfo.nth(0);
-    }
-
-    async getProductsWithPricesBelowOrEqualNum(price) {
-        let size = this.productsPageLocators.productsInfo.size();
-        let productsArr = [];
-
-        for (let i = 0; i <= size; i++) {
-            let currentProduct = this.productsInfo[i];
-
-            let priceAsText = await currentProduct.locator('.inventory_item_price').textContent().slice(1);
-            let price = Number(priceAsText);
-
-            if (price < number) {
-                productsArr.push(currentProduct);
-            }
-        }
-        return productsArr;
-
-    }
-
-    async getProductsWithPricesAboveOrEqualNum(price) {
-        let size = this.productsPageLocators.productsInfo.size();
-        let productsArr = [];
-
-        for (let i = 0; i < size; i++) {
-            let currentProduct = this.productsInfo[i];
-
-            let priceAsText = await currentProduct.locator('.inventory_item_price').textContent().slice(1);
-            let price = Number(priceAsText);
-
-            if (price >= number) {
-                productsArr.push(currentProduct);
-            }
-        }
-        return productsArr;
+    async getProductOnProductsPagePerIndex(index) {
+        return await this.productsPageLocators.productsInfo.nth(index);
     }
 }
