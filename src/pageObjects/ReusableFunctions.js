@@ -3,7 +3,7 @@ import { ReusableFunctionsLocators } from "@src/pageLocators/reusableFunctionsLo
 export class ReusableFunctions {
     constructor(page) {
         this.page = page;
-        this.reusableFunctions = ReusableFunctions(page);
+        this.reusableFunctionsLocators = ReusableFunctionsLocators(page);
     }
 
     async clickAddToCart(product) {
@@ -15,11 +15,11 @@ export class ReusableFunctions {
     }
 
     async clickShoppingCart() {
-        await this.reusableFunctions.shoppingCartIcon.click();
+        await this.reusableFunctionsLocators.shoppingCartIcon.click();
     }
 
     async clickLogOut() {
-        await this.reusableFunctions.menu.click();
-        await this.reusableFunctions.logout.click();
+        await this.reusableFunctionsLocators.menu.click();
+        await this.reusableFunctionsLocators.logout.click();
     }
 }

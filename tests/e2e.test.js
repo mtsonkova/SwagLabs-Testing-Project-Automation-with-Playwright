@@ -13,7 +13,7 @@ import {expect} from '@playwright/test';
         await page.goto(baseUrl);
          let { username, password } = loginCredentials[0];
          await loginPage.login(username, password);
-         await page.context().storageState({ path: '@utils/auth.json' });
+         await page.context().storageState({ path: 'utils/auth.json' });
     })
 
         const { firstName, lastName, postalCode } = testData.userData;
@@ -28,7 +28,7 @@ import {expect} from '@playwright/test';
             
             await page.goto('https://www.saucedemo.com/inventory.html');
                       
-            await productsPage.cselectFilter('low to high');
+            await productsPage.selectFilter('low to high');
             
             let cheapestProduct = await productsPage.getProductPerIndex(0);
             await reusableFunctions.clickAddToCart(cheapestProduct);
