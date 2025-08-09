@@ -46,6 +46,9 @@ async selectFilter(filterValue) {
 }
 
     async getProductOnProductsPagePerIndex(index) {
+        if(index < 0 || index > his.productsPageLocators.productsInfo.length - 1) {
+            throw('Index cannot be smaller than 0 and greater than 5')
+        }
         return await this.productsPageLocators.productsInfo.nth(index);
     }
 }
