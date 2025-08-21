@@ -7,6 +7,7 @@ import {expect} from '@playwright/test';
   
     test.describe('Authenticated e2e test cases with skip of logging screen', async () => {
         let { loginCredentials } = testData;
+        const inventoryUrl = 'https://www.saucedemo.com/inventory.html'
     
         test.beforeAll('Initial setup', async({page}) => {
         const loginPage = new LoginPage(page);
@@ -26,12 +27,38 @@ import {expect} from '@playwright/test';
             checkoutComplete,
             reusableFunctions}) => {
             
-            await page.goto('https://www.saucedemo.com/inventory.html');
+            await page.goto(inventoryUrl);
                       
             await productsPage.selectFilter('low to high');
             
             let cheapestProduct = await productsPage.getProductPerIndex(0);
             await reusableFunctions.clickAddToCart(cheapestProduct);
+            await reusableFunctions.clickShoppingCart();
+            await cartPage.clickOnCheckout();
+            await checkoutInformation.fillUserData(firstName, lastName, postalCode);
+            await checkoutOverview.clickOnFinish();
+            let titleLocator = checkoutComplete.getHeadingLocator();
+            let paragraphLocator = checkoutComplete.getParagraphLocator();
+            await expect(titleLocator).toHaveText(testData.checkoutCompleteTitle);
+            await expect(paragraphLocator).toHaveText(testData.checkoutCompleteParagraph);
+            await reusableFunctions.clickLogOut();
+            expect(page.url()).toEqual(baseUrl);
+        });
+
+         test('Purchase the most expensive product from Products page', async ({page, 
+            productsPage,
+            cartPage,
+            checkoutInformation,
+            checkoutOverview,
+            checkoutComplete,
+            reusableFunctions}) => {
+            
+            await page.goto(inventoryUrl);
+                      
+            await productsPage.selectFilter('high to low');
+            
+            let mostExpensiveProduct = await productsPage.getProductPerIndex(0);
+            await reusableFunctions.clickAddToCart(mostExpensiveProduct);
             await reusableFunctions.clickShoppingCart();
             await cartPage.clickOnCheckout();
             await checkoutInformation.fillUserData(firstName, lastName, postalCode);
