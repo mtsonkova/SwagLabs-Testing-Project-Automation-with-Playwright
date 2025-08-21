@@ -7,8 +7,7 @@ import {expect} from '@playwright/test';
   
     test.describe('Authenticated e2e test cases with skip of logging screen', async () => {
         let { loginCredentials } = testData;
-        const inventoryUrl = 'https://www.saucedemo.com/inventory.html'
-    
+       
         test.beforeAll('Initial setup', async({page}) => {
         const loginPage = new LoginPage(page);
         await page.goto(baseUrl);
@@ -19,6 +18,8 @@ import {expect} from '@playwright/test';
 
         const { firstName, lastName, postalCode } = testData.userData;
 
+        test.use({ storageState: 'utils/auth.json' });
+
         test('Purchase the cheapest product from Products page', async ({page, 
             productsPage,
             cartPage,
@@ -27,7 +28,7 @@ import {expect} from '@playwright/test';
             checkoutComplete,
             reusableFunctions}) => {
             
-            await page.goto(inventoryUrl);
+            await page.goto('https://www.saucedemo.com/inventory.html');
                       
             await productsPage.selectFilter('low to high');
             
@@ -41,8 +42,6 @@ import {expect} from '@playwright/test';
             let paragraphLocator = checkoutComplete.getParagraphLocator();
             await expect(titleLocator).toHaveText(testData.checkoutCompleteTitle);
             await expect(paragraphLocator).toHaveText(testData.checkoutCompleteParagraph);
-            await reusableFunctions.clickLogOut();
-            expect(page.url()).toEqual(baseUrl);
         });
 
          test('Purchase the most expensive product from Products page', async ({page, 
@@ -53,7 +52,7 @@ import {expect} from '@playwright/test';
             checkoutComplete,
             reusableFunctions}) => {
             
-            await page.goto(inventoryUrl);
+            await page.goto('https://www.saucedemo.com/inventory.html');
                       
             await productsPage.selectFilter('high to low');
             
@@ -67,8 +66,6 @@ import {expect} from '@playwright/test';
             let paragraphLocator = checkoutComplete.getParagraphLocator();
             await expect(titleLocator).toHaveText(testData.checkoutCompleteTitle);
             await expect(paragraphLocator).toHaveText(testData.checkoutCompleteParagraph);
-            await reusableFunctions.clickLogOut();
-            expect(page.url()).toEqual(baseUrl);
         });
     });
 
