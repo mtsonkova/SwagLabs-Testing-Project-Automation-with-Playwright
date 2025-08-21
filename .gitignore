@@ -132,3 +132,7 @@ dist
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Ignore Allure results and reports
+allure-results/
+allure-report/

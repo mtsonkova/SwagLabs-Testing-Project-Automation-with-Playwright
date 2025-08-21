@@ -2,8 +2,7 @@
         "loginCredentials": [
             {
                 "username": "standard_user",
-                "password": "secret_sauce",
-                "url": "https://www.saucedemo.com/inventory.html"
+                "password": "secret_sauce"               
             },
             {
                 "username": "locked_out_user",
